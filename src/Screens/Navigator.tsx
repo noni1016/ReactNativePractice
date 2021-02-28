@@ -17,22 +17,80 @@ import {
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // import Hello from '~/Hello';
+import MyFeed from '~/Screens/MyFeed';
+import SearchBar from '~/Components/SearchBar';
 
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 
 const DefaultScreen = () => {
     return <Text>DefaultScreen</Text>
 };
 
+const MyFeedTab = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+              name="MyFeed"
+              component={MyFeed}
+              options={{title: 'SNS App'}}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const FeedsTab = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+              name="Feeds"
+              component={DefaultScreen}
+            //   options={{
+            //       header: () => <SearchBar />
+            //   }}
+            />
+            <Stack.Screen
+              name="FeedListOnly"
+              component={DefaultScreen}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const UploadTab = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+              name="Upload"
+              component={DefaultScreen}
+            />
+        </Stack.Navigator>
+    )
+}
+
+
+
+const ProfileTab = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+              name="Profile"
+              component={DefaultScreen}
+            />
+        </Stack.Navigator>
+    )
+}
+
+
 const MainTab = () => {
     return (
         <Tab.Navigator tabBarOptions={{showLabel: false}}>
             <Tab.Screen
               name="MyFeed"
-              component={DefaultScreen}
+              component={MyFeedTab}
               options={{
                 //   tabBarIcon: ({color}) => <Icon name="home" color={color} size={26} />
                 tabBarIcon: ({focused}) => (
@@ -48,7 +106,7 @@ const MainTab = () => {
             />
             <Tab.Screen
               name="Feeds"
-              component={DefaultScreen}
+              component={FeedsTab}
               options={{
                 tabBarIcon: ({focused}) => (
                     <Image
@@ -63,7 +121,7 @@ const MainTab = () => {
             />
             <Tab.Screen
               name="Upload"
-              component={DefaultScreen}
+              component={UploadTab}
               options={{
                 tabBarIcon: ({focused}) => (
                     <Image
@@ -93,7 +151,7 @@ const MainTab = () => {
             />
             <Tab.Screen
               name="Profile"
-              component={DefaultScreen}
+              component={ProfileTab}
               options={{
                 tabBarIcon: ({focused}) => (
                     <Image
@@ -145,6 +203,7 @@ const Navigator = () => {
     return (
         <NavigationContainer>
             {userInfo? <MainNavi /> : <LoginStackNavi />}
+            {/* <MyFeedTab /> */}
         </NavigationContainer>
     )
 
