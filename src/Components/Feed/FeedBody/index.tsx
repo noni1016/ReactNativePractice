@@ -62,8 +62,9 @@ const FeedBody = ({ id, images }: Props) => {
               scrollEnabled={imageLength > 1}
               onScroll={(event: NativeSyntheticEvent<NativeScrollEvent>) => {
                   setIndicatorIndex(
-                      event.nativeEvent.contentOffset.x / Dimensions.get('window').width
+                      Math.round(event.nativeEvent.contentOffset.x / Dimensions.get('window').width)
                   );
+                //   console.log(indicatorIndex);
               }}>
                   {images.map((image, index) => (
                       <ImageContainer key={`FeedImage-${id}-${index}`}>
